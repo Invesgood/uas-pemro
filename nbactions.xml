@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  File ini memberi tahu NetBeans cara menjalankan project.
+  Tanpa file ini, NetBeans memakai 'exec-maven-plugin' yang GAGAL untuk Spring Boot.
+  Di sini kita arahkan tombol Run/Debug ke goal 'spring-boot:run'.
+-->
+<actions>
+    <action>
+        <actionName>run</actionName>
+        <goals>
+            <goal>process-classes</goal>
+            <goal>org.springframework.boot:spring-boot-maven-plugin:run</goal>
+        </goals>
+    </action>
+    <action>
+        <actionName>debug</actionName>
+        <goals>
+            <goal>process-classes</goal>
+            <goal>org.springframework.boot:spring-boot-maven-plugin:run</goal>
+        </goals>
+        <properties>
+            <jpda.listen>true</jpda.listen>
+            <spring-boot.run.jvmArguments>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</spring-boot.run.jvmArguments>
+        </properties>
+    </action>
+    <action>
+        <actionName>profile</actionName>
+        <goals>
+            <goal>process-classes</goal>
+            <goal>org.springframework.boot:spring-boot-maven-plugin:run</goal>
+        </goals>
+    </action>
+</actions>

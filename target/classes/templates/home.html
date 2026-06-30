@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Beranda')}"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar('home')}"></nav>
+
+<!-- ===== HERO HEADER ===== -->
+<header class="hero">
+    <div class="container">
+        <h1>Reservasi Kamar Hotel</h1>
+        <p>Pesan kamar impian Anda dengan mudah. Pilih tipe kamar, tentukan tanggal menginap, dan nikmati pengalaman menginap terbaik bersama kami.</p>
+        <div class="gold-line"></div>
+    </div>
+</header>
+
+<main class="content">
+    <div class="container">
+
+        <div th:replace="~{fragments/layout :: notifikasi}"></div>
+
+        <!-- ===== STAT RINGKAS ===== -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-lg-3">
+                <div class="stat">
+                    <span class="emoji">📋</span>
+                    <div>
+                        <div class="num" th:text="${totalReservasi}">0</div>
+                        <div class="lbl">Total Reservasi</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Kartu sisa kamar per tipe: otomatis dihitung dari data -->
+            <div class="col-6 col-lg-3" th:each="info : ${infoKamar}">
+                <div class="stat">
+                    <span class="emoji"
+                          th:text="${info.tipe == 'Standard' ? '🛏️' : (info.tipe == 'Deluxe' ? '✨' : '👑')}">🛏️</span>
+                    <div>
+                        <div class="num">
+                            <span th:text="${info.sisa}">0</span><span class="fs-6 text-muted">/<span th:text="${info.kuota}">0</span></span>
+                        </div>
+                        <div class="lbl">
+                            <span th:text="'Sisa ' + ${info.tipe}">Sisa</span>
+                            <span th:if="${info.penuh}" class="badge bg-danger ms-1">PENUH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== KARTU NAVIGASI ===== -->
+        <div class="row g-4">
+            <div class="col-md-6">
+                <a th:href="@{/reservasi/baru}" class="text-decoration-none">
+                    <div class="card h-100">
+                        <div class="card-body p-4 text-center">
+                            <i class="bi bi-calendar-plus display-5 d-block mb-2" style="color: var(--gold);"></i>
+                            <h5 class="fw-bold" style="color: var(--navy);">Pesan Kamar</h5>
+                            <p class="text-muted mb-0">Isi form pemesanan untuk membuat reservasi baru.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a th:href="@{/reservasi}" class="text-decoration-none">
+                    <div class="card h-100">
+                        <div class="card-body p-4 text-center">
+                            <i class="bi bi-list-check display-5 d-block mb-2" style="color: var(--gold);"></i>
+                            <h5 class="fw-bold" style="color: var(--navy);">Daftar Reservasi</h5>
+                            <p class="text-muted mb-0">Lihat seluruh reservasi dan batalkan jika perlu.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+/* ============ TEMA APLIKASI RESERVASI HOTEL ============ */
+:root {
+    --navy: #0f2741;
+    --navy-2: #1b3a5b;
+    --gold: #c9a35b;
+    --gold-soft: #e7d2a4;
+    --bg: #f4f6f9;
+    --ink: #20303f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- NAVBAR ---------- */
+.site-nav {
+    background: var(--navy);
+    box-shadow: 0 2px 10px rgba(15,39,65,.15);
+}
+.site-nav .navbar-brand {
+    color: var(--gold-soft);
+    font-weight: 700;
+    letter-spacing: .04rem;
+}
+.site-nav .navbar-brand:hover { color: #fff; }
+.site-nav .nav-link {
+    color: rgba(255,255,255,.78);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: .45rem .8rem;
+}
+.site-nav .nav-link:hover { color: #fff; }
+.site-nav .nav-link.active {
+    color: var(--navy);
+    background: var(--gold);
+}
+.site-nav .navbar-toggler {
+    border-color: rgba(255,255,255,.3);
+}
+
+/* ---------- HERO / HEADER ---------- */
+.hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: #fff;
+    padding: 2.4rem 0 5rem;
+    position: relative;
+    overflow: hidden;
+}
+/* Hero versi pendek untuk sub-halaman */
+.hero.hero-sm { padding: 1.8rem 0 4rem; }
+.hero.hero-sm h1 { font-size: 1.7rem; }
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 80% 20%, rgba(201,163,91,.18), transparent 45%);
+    pointer-events: none; /* agar tombol di dalam hero tetap bisa diklik */
+}
+.hero .container { position: relative; z-index: 1; }
+.hero .brand {
+    font-size: 1.05rem;
+    letter-spacing: .18rem;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    font-weight: 600;
+}
+.hero h1 {
+    font-weight: 700;
+    margin: .25rem 0 .35rem;
+    font-size: 2.1rem;
+}
+.hero p {
+    color: rgba(255,255,255,.78);
+    margin: 0;
+    max-width: 560px;
+}
+.hero .gold-line {
+    width: 70px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 4px;
+    margin: 1rem 0 0;
+}
+
+/* ---------- KONTEN NAIK MENUTUPI HERO ---------- */
+.content {
+    margin-top: -3rem;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+/* ---------- KARTU ---------- */
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(15,39,65,.08);
+    overflow: hidden;
+}
+.card-head {
+    background: #fff;
+    padding: 1rem 1.25rem;
+    border-bottom: 2px solid #eef1f5;
+    font-weight: 700;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+}
+.card-head .ico { color: var(--gold); }
+
+/* ---------- STAT KECIL ---------- */
+.stat {
+    background: #fff;
+    border-radius: 14px;
+    padding: .9rem 1.1rem;
+    box-shadow: 0 8px 20px rgba(15,39,65,.06);
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+}
+.stat .num { font-size: 1.6rem; font-weight: 700; color: var(--navy); line-height: 1; }
+.stat .lbl { font-size: .8rem; color: #7b8a99; text-transform: uppercase; letter-spacing: .05rem; }
+.stat .emoji { font-size: 1.6rem; }
+
+/* ---------- FORM ---------- */
+.form-label { font-weight: 600; font-size: .9rem; color: var(--navy); }
+.form-control, .form-select {
+    border-radius: 10px;
+    padding: .6rem .8rem;
+    border: 1.5px solid #e3e8ee;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 .2rem rgba(201,163,91,.18);
+}
+.btn-book {
+    background: linear-gradient(135deg, var(--gold), #b8924a);
+    border: none;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: .03rem;
+    padding: .7rem;
+    border-radius: 10px;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-book:hover {
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(201,163,91,.4);
+}
+
+/* ---------- TABEL ---------- */
+.table thead th {
+    background: var(--navy);
+    color: #fff;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .04rem;
+    border: none;
+}
+.table tbody td { vertical-align: middle; }
+.table tbody tr:hover { background: #fbf7ee; }
+
+/* badge tipe kamar */
+.badge-room { font-size: .78rem; padding: .4rem .65rem; border-radius: 8px; font-weight: 600; }
+.badge-standard { background: #e6f0fb; color: #1d6fc0; }
+.badge-deluxe   { background: #efeafc; color: #6f42c1; }
+.badge-suite    { background: #fdf0e1; color: #b8762a; }
+
+.date-cell { white-space: nowrap; font-size: .9rem; }
+.date-cell .ico { color: var(--gold); }
+
+.btn-cancel {
+    border-radius: 8px;
+    font-size: .8rem;
+    padding: .28rem .6rem;
+}
+
+/* ---------- ALERT ---------- */
+.alert { border: none; border-radius: 12px; }
+
+/* ---------- FOOTER ---------- */
+footer.app-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,.65);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2.5rem;
+}
+footer.app-footer .gold { color: var(--gold-soft); }
+
+.empty-row { color: #9aa7b3; }

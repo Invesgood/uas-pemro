@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Daftar Reservasi')}"></head>
+<body>
+
+<nav th:replace="~{fragments/layout :: navbar('daftar')}"></nav>
+
+<header class="hero hero-sm">
+    <div class="container">
+        <div class="brand"><i class="bi bi-list-check"></i> Reservasi</div>
+        <h1>Daftar Reservasi</h1>
+        <div class="gold-line"></div>
+    </div>
+</header>
+
+<main class="content">
+    <div class="container">
+
+        <div th:replace="~{fragments/layout :: notifikasi}"></div>
+
+        <div class="d-flex justify-content-end mb-3">
+            <a th:href="@{/reservasi/baru}" class="btn btn-book px-4">
+                <i class="bi bi-calendar-plus me-1"></i> Tambah Reservasi
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-head"><i class="bi bi-list-check ico"></i> Daftar Reservasi</div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th class="ps-3">#</th>
+                                <th>Nama Tamu</th>
+                                <th>Tipe Kamar</th>
+                                <th>Check-in</th>
+                                <th>Check-out</th>
+                                <th class="text-end pe-3">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${#lists.isEmpty(daftarReservasi)}">
+                                <td colspan="6" class="text-center empty-row py-4">
+                                    <i class="bi bi-inbox fs-3 d-block mb-1"></i>
+                                    Belum ada reservasi.
+                                    <a th:href="@{/reservasi/baru}">Pesan kamar sekarang</a>.
+                                </td>
+                            </tr>
+                            <tr th:each="r : ${daftarReservasi}">
+                                <td class="ps-3 fw-bold text-muted" th:text="${r.id}"></td>
+                                <td class="fw-semibold" th:text="${r.namaTamu}"></td>
+                                <td>
+                                    <span class="badge-room"
+                                          th:classappend="${r.tipeKamar == 'Standard' ? 'badge-standard' : (r.tipeKamar == 'Deluxe' ? 'badge-deluxe' : 'badge-suite')}"
+                                          th:text="${r.tipeKamar}"></span>
+                                </td>
+                                <td class="date-cell"><i class="bi bi-calendar-check ico me-1"></i><span th:text="${r.tanggalCheckIn}"></span></td>
+                                <td class="date-cell"><i class="bi bi-calendar-x ico me-1"></i><span th:text="${r.tanggalCheckOut}"></span></td>
+                                <td class="text-end pe-3">
+                                    <form th:action="@{'/reservasi/hapus/' + ${r.id}}" method="post"
+                                          onsubmit="return confirm('Batalkan reservasi ini?');">
+                                        <button type="submit" class="btn btn-outline-danger btn-cancel">
+                                            <i class="bi bi-trash"></i> Batal
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
